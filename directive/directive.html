@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .palegreen {
+            background: palegreen;
+        }
+
+        .deeppink {
+            background: deeppink;
+        }
+
+        .mediumorchid {
+            background: mediumorchid;
+        }
+
+        #bg {
+            width: 100px;
+            height: 100px;
+            border: 2px dashed khaki;
+        }
+        .active{
+            font-size: 20px;
+            font-weight: bold;
+            color:gold;
+        }
+    </style>
+</head>
+<body ng-app="myapp">
+<div>
+    <div ng-controller="myctler">
+
+        请输入信息: <input type="text" ng-model="names">
+        <p>姓名:{{names}}</p>
+        <input type="button" ng-click="showName()" value="点名"><br>
+
+        <!--显示隐藏/循环(ng-repeat)/ng-hide/ng-show-->
+        显示姓名： <input type="checkbox" ng-model="trfl" ng-init="trfl=true">
+        <div ng-repeat="n in records" ng-show="trfl">
+            <p>{{n.surnames+n.name}}</p>
+        </div>
+
+        <!--ng-class/ng-bind/ng-init-->
+        <div ng-init="name='杨再祥'">
+            我家的狗名字叫：<span ng-bind="name" ng-class="colors"></span>哈哈。。。。
+        </div>
+
+    </div>
+    <!--ng-class-->
+    <div>
+        请选择:<select ng-model="bg">
+        <option selected value="palegreen" >palegreen</option>
+        <option value="deeppink">deeppink</option>
+        <option value="mediumorchid">mediumorchid</option>
+    </select>
+        <div ng-class="bg" id="bg"></div>
+    </div>
+
+    <!--if判断-->
+    点我：<input type="checkbox" ng-model="myVar" ng-init="myVar = false">
+    <div ng-if="myVar">
+        <p>哈哈上当了</p>
+    </div>
+</div>
+<script src="js/angular.js"></script>
+<script>
+    var app = angular.module("myapp", []);
+    app.controller("myctler", function ($scope) {
+                $scope.names = "John",
+                $scope.showName = function () {
+                    alert($scope.names)
+                },
+                $scope.colors = "active",
+                $scope.records = [
+                    {
+                        "surnames": "杨",
+                        "name": "小狗"
+                    }, {
+                        "surnames": "杨",
+                        "name": "小猪"
+                    }, {
+                        "surnames": "杨",
+                        "name": "小羊"
+                    }, {
+                        "surnames": "杨",
+                        "name": "兔子"
+                    }
+                ]
+    })
+</script>
+</body>
+</html>
